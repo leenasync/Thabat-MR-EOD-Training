@@ -1,12 +1,14 @@
 # Thabat (ثبات) — AI-Enhanced Mixed Reality EOD Training
 
-> A Mixed Reality training simulation on Meta Quest for **Explosive Ordnance Disposal (EOD)**. Trainees detect, uncover and defuse a landmine under time pressure, while a **smart glove** and a **hybrid AI model** measure how steady their hands are in real time. Built for **Defensathon 2026**.
+> A Mixed Reality training simulation on Meta Quest for **Explosive Ordnance Disposal (EOD)**. Trainees detect, uncover and defuse a landmine under time pressure, while a **smart glove** and a **hybrid AI model** measure how steady their hands are in real time.
+
+🏆 **3rd Place, Robotics Track, Defensathon 2026**
 
 ![Unity](https://img.shields.io/badge/Unity-6000.1-black?logo=unity)
 ![Meta Quest](https://img.shields.io/badge/Platform-Meta%20Quest%20MR-0467DF?logo=meta)
 ![OpenXR](https://img.shields.io/badge/XR-OpenXR%20%2B%20XRI%203-green)
 ![ESP32](https://img.shields.io/badge/Hardware-ESP32%20Smart%20Glove-E7352C?logo=espressif)
-![Hackathon](https://img.shields.io/badge/Defensathon-2026-8A2BE2)
+![Award](https://img.shields.io/badge/Defensathon%202026-3rd%20Place%20%C2%B7%20Robotics-FFB000?logo=trophy)
 
 ---
 
@@ -28,6 +30,8 @@ Throughout the mission, a smart glove streams hand-motion data. The **Hybrid Han
 
 - 🧤 **ESP32 smart glove:** streams vibration, speed and movement over WebSocket
 - 🤖 **Hybrid Hand AI:** calibrates the trainee's normal hand movement, detects shaking, issues warnings and danger alerts, and outputs a stability score
+- 📈 **Adaptive training levels:** hand stability directly affects gameplay. A shaky hand during wire cutting can cause failure, and each level records its score, warnings and danger count.
+- 🖥️ **Live AI HUD:** the trainee sees their own hand-stability status inside the headset during the mission
 - 📊 **Live instructor dashboard:** Unity sends the glove data, AI score, warnings and mission status in real time
 - 📡 **Proximity-based detector:** dynamic beep rate and controller haptics
 - ⛏️ **Real-time terrain digging:** heightmap deformation in VR
@@ -97,7 +101,14 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
   - Ordered defuse sequence and wire cutting
   - Timer, scoring, leaderboard and success / fail outcomes
   - Explosion VFX, narration and audio cues
-- 🧤 **Live smart-glove integration:** built the real-time integration between the experience and the live data coming from the smart glove. This powers the **Hybrid Hand AI**, which gives the trainee a **live self-assessment** of hand stability during the mission and streams the results to the instructor dashboard.
+- 🧤 **Live smart-glove integration:** built the real-time integration between the experience and the live data coming from the smart glove, and tied it into the concept and the gameplay:
+  - Receiving the glove data live inside Unity (WebSocket, auto-reconnect)
+  - The **Hybrid Hand AI**, which calibrates and evaluates hand stability and gives the trainee a **live self-assessment** during the mission
+  - Making hand stability **drive the gameplay**: wire cutting, adaptive levels, scoring and mission outcome
+  - Streaming the live assessment to the instructor dashboard
+- 🏆 Led the team to **3rd Place in the Robotics Track at Defensathon 2026**
+
+> Thabat was a team effort. The smart-glove hardware and the UI/UX design were built by my teammates.
 
 ## Demo
 
