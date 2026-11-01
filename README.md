@@ -100,6 +100,7 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
   - Ordered defuse sequence and wire cutting
   - Timer, scoring, leaderboard and success / fail outcomes
   - Explosion VFX, narration and audio cues
+  - All UI programming and interaction logic
 - 🧤 **Live smart-glove integration:** built the real-time integration between the experience and the live data coming from the smart glove, and tied it into the concept and the gameplay:
   - Receiving the glove data live inside Unity (WebSocket, auto-reconnect)
   - The **Hybrid Hand AI**, which calibrates and evaluates hand stability and gives the trainee a **live self-assessment** during the mission
@@ -107,7 +108,7 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
   - Streaming the live assessment to the instructor dashboard
 - 🏆 Led the team to **3rd Place in the Robotics Track at Defensathon 2026**
 
-> Thabat was a team effort. The smart-glove hardware, the terrain-digging mechanic and the UI/UX design were built by my teammates.
+> Thabat was a team effort. The smart-glove hardware and the visual UI/UX design (layout, shapes and colors) were created by my teammates.
 
 ## Demo
 
