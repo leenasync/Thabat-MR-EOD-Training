@@ -1,10 +1,10 @@
 # Thabat (ثبات) — AI-Enhanced Mixed Reality EOD Training
 
-> A Mixed Reality training simulation on Meta Quest for **Explosive Ordnance Disposal (EOD)**. Trainees detect, uncover and defuse a landmine under time pressure, while a **smart glove** and a **hybrid AI model** measure how steady their hands are in real time.
+> A Mixed Reality training simulation on Meta Quest for **Explosive Ordnance Disposal (EOD)**. Trainees defuse explosive devices by cutting the right wires under time pressure, while a **smart glove** and a **hybrid AI model** measure how steady their hands are in real time.
 
 🏆 **3rd Place, Robotics Track, Defensathon 2026**
 
-![Unity](https://img.shields.io/badge/Unity-6000.1-black?logo=unity)
+![Unity](https://img.shields.io/badge/Unity-6000.3-black?logo=unity)
 ![Meta Quest](https://img.shields.io/badge/Platform-Meta%20Quest%20MR-0467DF?logo=meta)
 ![OpenXR](https://img.shields.io/badge/XR-OpenXR%20%2B%20XRI%203-green)
 ![ESP32](https://img.shields.io/badge/Hardware-ESP32%20Smart%20Glove-E7352C?logo=espressif)
@@ -16,36 +16,34 @@
 
 *Thabat* means **"steadiness"** in Arabic. In bomb disposal, a shaking hand can cost a life.
 
-The simulation turns the trainee's real room into a mission area using Mixed Reality passthrough. The trainee must:
+The simulation brings the explosive device into the trainee's real room using Mixed Reality passthrough. The trainee must:
 
-1. **Equip** the gear: backpack, helmet and tools
-2. **Detect** the landmine with a handheld detector. The beeps get faster and the haptics get stronger as the trainee gets closer.
-3. **Dig** the sand to uncover the mine, using a deformable terrain
-4. **Defuse** it by following the correct sequence: open the cover, remove the pin, cut the right wire
-5. **Beat the clock.** A wrong step or running out of time triggers an explosion.
+1. **Gear up:** place the helmet, backpack and radio. A checklist confirms each item.
+2. **Start the mission:** the device appears in front of the trainee and the countdown begins.
+3. **Defuse it:** use the wire cutter to cut the correct wire, across **three levels** of increasing difficulty.
+4. **Stay steady:** a smart glove streams hand-motion data the whole time. A shaky hand at the wrong moment can fail the mission.
+5. **Beat the clock.** A wrong wire or running out of time triggers an explosion.
 
-Throughout the mission, a smart glove streams hand-motion data. The **Hybrid Hand AI** scores the trainee's stability, and an instructor can watch everything on a **live dashboard**.
+The **Hybrid Hand AI** gives the trainee a live self-assessment of hand stability, and an instructor can follow everything on a **live dashboard**.
 
 ## Features
 
 - 🧤 **ESP32 smart glove:** streams vibration, speed and movement over WebSocket
 - 🤖 **Hybrid Hand AI:** calibrates the trainee's normal hand movement, detects shaking, issues warnings and danger alerts, and outputs a stability score
-- 📈 **Adaptive training levels:** hand stability directly affects gameplay. A shaky hand during wire cutting can cause failure, and each level records its score, warnings and danger count.
-- 🖥️ **Live AI HUD:** the trainee sees their own hand-stability status inside the headset during the mission
-- 📊 **Live instructor dashboard:** Unity sends the glove data, AI score, warnings and mission status in real time
-- 📡 **Proximity-based detector:** dynamic beep rate and controller haptics
-- ⛏️ **Real-time terrain digging:** heightmap deformation in VR
-- ✂️ **Ordered defuse sequence:** wrong order means failure, with explosion VFX, sound and haptics
-- ⏱️ **Timer, score and leaderboard:** fastest successful defuses
-- ⌨️ **In-headset virtual keyboard** for entering the player name
-- 🔊 **Narration and audio cues:** mission briefing, heartbeat, ticking and success or fail sounds
+- 📈 **Adaptive training levels:** three bomb levels, where hand stability directly affects the outcome. Each level records its score, warnings and danger count.
+- 🖥️ **Live AI HUD:** the trainee sees their own hand-stability status inside the headset
+- 📊 **Live instructor dashboard:** Unity streams glove data, AI score, warnings and mission status in real time
+- ✂️ **Physical wire cutting:** an animated cutter with real jaw movement, and correct and wrong wires
+- 🎒 **Gear checklist:** XR sockets for the helmet, backpack and radio
+- ⏱️ **Countdown timer** with success and fail outcomes
+- 💥 **Explosion and feedback:** VFX, sound and UI feedback
 
 ## Tech Stack
 
 | Layer | Technology |
 |-------|------------|
-| Engine | Unity 6 (6000.1.14f1), URP |
-| XR | Meta XR SDK Core, OpenXR 1.15, XR Interaction Toolkit 3.1, XR Hands 1.6 |
+| Engine | Unity 6 (6000.3.21f1), URP |
+| XR | Meta XR SDK Core, OpenXR, XR Interaction Toolkit 3, XR Hands |
 | Device | Meta Quest (Mixed Reality passthrough) |
 | Hardware | ESP32 smart glove with motion and vibration sensors |
 | Networking | WebSocket (glove → Unity → dashboard) |
@@ -54,31 +52,31 @@ Throughout the mission, a smart glove streams hand-motion data. The **Hybrid Han
 ## Architecture
 
 ```
-┌───────────────┐  WebSocket   ┌────────────────────────┐  WebSocket   ┌──────────────────┐
-│ ESP32 Smart   │ ───────────▶ │  Unity MR (Quest)      │ ───────────▶ │ Instructor       │
-│ Glove         │  vibration,  │  SmartGloveToHybridAI  │  score,      │ Dashboard        │
-│ (sensors)     │  speed,      │  → HybridHandAI        │  warnings,   │ (live view)      │
-└───────────────┘  movement    │  → BombTrainingManager │  status      └──────────────────┘
-                               └────────────────────────┘
+┌───────────────┐  WebSocket   ┌──────────────────────────┐  WebSocket   ┌──────────────────┐
+│ ESP32 Smart   │ ───────────▶ │  Unity MR (Quest)        │ ───────────▶ │ Instructor       │
+│ Glove         │  vibration,  │  SmartGloveToHybridAI    │  score,      │ Dashboard        │
+│ (sensors)     │  speed,      │  → HybridHandAI          │  warnings,   │ (live view)      │
+└───────────────┘  movement    │  → AdaptiveTrainingMgr   │  status      └──────────────────┘
+                               └──────────────────────────┘
 ```
 
 ### Main scripts
 
 | Script | Responsibility |
 |--------|----------------|
-| `BombTrainingManager` | Mission flow, timer, score, success and fail panels, haptics |
+| `AdaptiveTrainingManager` | Mission flow, three bomb levels, panels, per-level results |
 | `HybridHandAI` | Calibration, stability evaluation, warnings, danger count, final score |
 | `SmartGloveToHybridAI` | WebSocket client for the ESP32 glove, with auto-reconnect |
 | `UnityDashboardSender` | Streams live mission data to the instructor dashboard |
-| `BombDetectorHoldOnly` | Distance-based beeping and haptic feedback |
-| `DigManager` / `TerrainDigVR` | Real-time terrain heightmap digging |
-| `DefuseSequence` / `WireCutterZone` | Ordered defuse steps and wire cutting |
-| `LeaderboardManager` | Ranks runs by completion time |
+| `LiveHandUI` | In-headset live AI status |
+| `BomWire` / `WireCut` / `CutterController` / `WireCutterZone` | Wire-cutting interaction and correct or wrong wire logic |
+| `BombTimer` / `BombResult` | Countdown, success and fail outcomes |
+| `SocketChecklist` / `EquipHandler` | Gear check-in before the mission |
 
 ## Getting Started
 
-1. Open the project in **Unity 6000.1.14f1** with Android Build Support.
-2. Open the main scene in `Assets/` (`main.unity` / `MR.unity`).
+1. Open the project in **Unity 6000.3.21f1** with Android Build Support.
+2. Open the scene `Assets/Scenes/defensTHONE3rd.unity`.
 3. Set the network addresses in the Inspector:
    - `SmartGloveToHybridAI` → **ESP32 URL**, for example `ws://192.168.4.1:81`
    - `UnityDashboardSender` → **Dashboard Server URL**, for example `ws://<dashboard-PC-IP>:8002/unity`
@@ -96,10 +94,10 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
 - 👑 **Team leadership:** led the team from the initial idea to the final demo at Defensathon 2026
 - 💡 **Concept & experience design:** came up with the idea and designed the full training scenario and mission flow
 - 🥽 **Full Unity development:** built the complete Mixed Reality experience on Meta Quest, including:
-  - Landmine detection with distance-based audio and haptics
-  - Ordered defuse sequence and wire cutting
-  - Timer, scoring, leaderboard and success / fail outcomes
-  - Explosion VFX, narration and audio cues
+  - Gear check-in and mission start
+  - Three adaptive bomb levels and wire-cutting interaction
+  - Timer, scoring and success / fail outcomes
+  - Explosion VFX and audio cues
   - All UI programming and interaction logic
 - 🧤 **Live smart-glove integration:** built the real-time integration between the experience and the live data coming from the smart glove, and tied it into the concept and the gameplay:
   - Receiving the glove data live inside Unity (WebSocket, auto-reconnect)
@@ -119,7 +117,7 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
 ## Credits
 
 Third-party assets are the property of their respective authors and are used under their licenses:
-Hovl Studio (Magic Effects), JMO (Cartoon FX Remaster), Staggart (Procedural Terrain Painter), SkySeries Freebie, SnowyCocoon (Camouflage Texture Pack), Unity Terrain Sample Assets, and 3D models from Sketchfab (military helmet, backpack, walkie-talkie: see each model's license for attribution).
+Hovl Studio (Magic Effects), SnowyCocoon (Camouflage Texture Pack), Unity XR Interaction Toolkit and XR Hands samples, and 3D models from Sketchfab (military helmet, backpack, walkie-talkie: see each model's license for attribution).
 
 ## Author
 
