@@ -91,7 +91,7 @@ The **Hybrid Hand AI** gives the trainee a live self-assessment of hand stabilit
 
 Thabat was built as a team project. I led the team and owned the entire Unity experience end to end.
 
-- 👑 **Team leadership:** led the team from the initial idea to the final demo at Defensathon 2026
+- **Team leadership:** led the team from the initial idea to the final demo at Defensathon 2026
 - 💡 **Concept & experience design:** came up with the idea and designed the full training scenario and mission flow
 - 🥽 **Full Unity development:** built the complete Mixed Reality experience on Meta Quest, including:
   - Gear check-in and mission start
