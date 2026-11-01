@@ -97,7 +97,6 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
 - 💡 **Concept & experience design:** came up with the idea and designed the full training scenario and mission flow
 - 🥽 **Full Unity development:** built the complete Mixed Reality experience on Meta Quest, including:
   - Landmine detection with distance-based audio and haptics
-  - Real-time terrain digging
   - Ordered defuse sequence and wire cutting
   - Timer, scoring, leaderboard and success / fail outcomes
   - Explosion VFX, narration and audio cues
@@ -108,7 +107,7 @@ Thabat was built as a team project. I led the team and owned the entire Unity ex
   - Streaming the live assessment to the instructor dashboard
 - 🏆 Led the team to **3rd Place in the Robotics Track at Defensathon 2026**
 
-> Thabat was a team effort. The smart-glove hardware and the UI/UX design were built by my teammates.
+> Thabat was a team effort. The smart-glove hardware, the terrain-digging mechanic and the UI/UX design were built by my teammates.
 
 ## Demo
 
