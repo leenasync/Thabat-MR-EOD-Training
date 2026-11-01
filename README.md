@@ -85,11 +85,19 @@ Throughout the mission, a smart glove streams hand-motion data. The **Hybrid Han
 
 ## My Role
 
-<!-- ✏️ Edit this section to match your exact contribution -->
-- Designed and developed the Mixed Reality training experience in Unity
-- Implemented the mission flow: detection, digging, defusing, timer, scoring and leaderboard
-- Integrated the ESP32 smart glove and the Hybrid Hand AI stability scoring
-- Built the real-time data link to the instructor dashboard
+**Team Leader & Lead Unity / XR Developer**
+
+Thabat was built as a team project. I led the team and owned the entire Unity experience end to end.
+
+- 👑 **Team leadership:** led the team from the initial idea to the final demo at Defensathon 2026
+- 💡 **Concept & experience design:** came up with the idea and designed the full training scenario and mission flow
+- 🥽 **Full Unity development:** built the complete Mixed Reality experience on Meta Quest, including:
+  - Landmine detection with distance-based audio and haptics
+  - Real-time terrain digging
+  - Ordered defuse sequence and wire cutting
+  - Timer, scoring, leaderboard and success / fail outcomes
+  - Explosion VFX, narration and audio cues
+- 🧤 **Live smart-glove integration:** built the real-time integration between the experience and the live data coming from the smart glove. This powers the **Hybrid Hand AI**, which gives the trainee a **live self-assessment** of hand stability during the mission and streams the results to the instructor dashboard.
 
 ## Demo
 
