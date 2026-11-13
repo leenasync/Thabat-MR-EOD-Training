@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/defemsthoneOriginal.unity
     guid: 5d682a9dcb8cfb1439a91748b46ba91f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/defensTHONE.unity
     guid: 2dd347629cda11b40ac6bedb5ae3e92e
   - enabled: 0
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Samples/XR Interaction Toolkit/3.1.2/Hands Interaction Demo/1111handdemo.unity
     guid: 3ff35cecbcc52cc42945cf531638a60a
+  - enabled: 1
+    path: Assets/Scenes/defensTHONE3rd.unity
+    guid: 7067142024a034d4badf46e65b0b0347
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6f1dd080070f5f042ab0453dad802e6a, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

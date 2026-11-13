@@ -451,6 +451,7 @@ public static class ApplyHoloUI
         t.enableAutoSizing = autoSize;
         if (autoSize) { t.fontSizeMin = minSize; t.fontSizeMax = size; }
         t.raycastTarget = false;
+        t.margin = Vector4.zero;
     }
 
     static void Place(RectTransform rt, Vector2 pos, Vector2 size)
